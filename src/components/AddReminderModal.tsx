@@ -19,12 +19,13 @@ export default function AddReminderModal({
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [category, setCategory] = useState("");
+  const [reminderCategory, setReminderCategory] = useState("");
 
   if (!isOpen) return null;
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || !date || !time) {
+    if (!title.trim() || !date || !time || !category || !reminderCategory) {
       return;
     }
 
@@ -33,7 +34,8 @@ export default function AddReminderModal({
       description: description.trim(),
       date,
       time,
-      category: category.trim() || undefined,
+      category: category.trim(),
+      reminderCategory: reminderCategory.trim(),
     });
 
     // Reset form
@@ -42,6 +44,7 @@ export default function AddReminderModal({
     setDate("");
     setTime("");
     setCategory("");
+    setReminderCategory("");
     onClose();
   };
 
@@ -137,16 +140,43 @@ export default function AddReminderModal({
               htmlFor="category"
               className="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
             >
-              Category (Optional)
+              Type <span className="text-red-500">*</span>
             </label>
-            <input
-              type="text"
+            <select
               id="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
+              required
               className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-black focus:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-50"
-              placeholder="e.g., Work, Personal, Health"
-            />
+            >
+              <option value="">Select a type</option>
+              <option value="birthday">Birthday</option>
+              <option value="holiday">Holiday</option>
+              <option value="anniversary">Anniversary</option>
+              <option value="event">Event</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              htmlFor="reminderCategory"
+              className="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
+            >
+              Reminder Type <span className="text-red-500">*</span>
+            </label>
+            <select
+              id="reminderCategory"
+              value={reminderCategory}
+              onChange={(e) => setReminderCategory(e.target.value)}
+              required
+              className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-black focus:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-50"
+            >
+              <option value="">Select a reminder type</option>
+              <option value="text">Text</option>
+              <option value="email">Email</option>
+              <option value="google calendar">Google Calendar</option>
+            </select>
           </div>
 
           <div className="flex gap-3 pt-4">

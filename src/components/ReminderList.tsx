@@ -56,11 +56,12 @@ export default function ReminderList({
                   <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
                     {reminder.title}
                   </h3>
-                  {reminder.category && (
-                    <span className="rounded-full bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300">
-                      {reminder.category}
-                    </span>
-                  )}
+                  <span className="rounded-full bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300">
+                    {reminder.category}
+                  </span>
+                  <span className="rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-600 dark:bg-blue-900 dark:text-blue-300">
+                    {reminder.reminderCategory}
+                  </span>
                 </div>
                 {reminder.description && (
                   <p className="mb-3 text-zinc-600 dark:text-zinc-400">

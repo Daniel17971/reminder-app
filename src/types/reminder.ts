@@ -4,6 +4,7 @@ export interface Reminder {
   description: string;
   date: string;
   time: string;
-  category?: string;
+  category: string;
+  reminderCategory: string;
 }
 
