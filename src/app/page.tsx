@@ -4,8 +4,10 @@ import { useState, useMemo } from "react";
 import { Reminder } from "@/types/reminder";
 import AddReminderModal from "@/components/AddReminderModal";
 import ReminderList from "@/components/ReminderList";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Home() {
+  const { logout } = useAuth();
   const [reminders, setReminders] = useState<Reminder[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingReminder, setEditingReminder] = useState<Reminder | null>(null);
@@ -82,13 +84,35 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-zinc-50 font-sans dark:bg-black">
       <main className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-50">
-            Reminder App
-          </h1>
-          <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-            Keep track of your important events and reminders
-          </p>
+        <div className="mb-8 flex items-start justify-between">
+          <div>
+            <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-50">
+              Reminder App
+            </h1>
+            <p className="mt-2 text-zinc-600 dark:text-zinc-400">
+              Keep track of your important events and reminders
+            </p>
+          </div>
+          <button
+            onClick={logout}
+            className="flex items-center gap-2 rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+              />
+            </svg>
+            Logout
+          </button>
         </div>
 
         {/* Search and Filter Bar */}
