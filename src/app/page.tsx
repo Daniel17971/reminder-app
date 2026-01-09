@@ -1,13 +1,15 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { signOut } from "next-auth/react";
 import { Reminder } from "@/types/reminder";
 import AddReminderModal from "@/components/AddReminderModal";
 import ReminderList from "@/components/ReminderList";
-import { useAuth } from "@/context/AuthContext";
 
 export default function Home() {
-  const { logout } = useAuth();
+  const handleLogout = () => {
+    signOut({ callbackUrl: "/" });
+  };
   const [reminders, setReminders] = useState<Reminder[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingReminder, setEditingReminder] = useState<Reminder | null>(null);
@@ -94,7 +96,7 @@ export default function Home() {
             </p>
           </div>
           <button
-            onClick={logout}
+            onClick={handleLogout}
             className="flex items-center gap-2 rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
           >
             <svg
